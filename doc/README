@@ -1,0 +1,15 @@
+Objective:
+
+1) To be able to simulate patience games
+
+  Write code that can lay and complete a patience game
+
+2) To be able to try different strategies
+
+  1) Lay out and join your cards as quickly as you can
+  2) Be lazy about joinig cards if it doesn't lead to immediate access to new cards
+  3) Lay out pack cards to increase pack card coverage
+
+3) To be able to increase the win-rate
+
+

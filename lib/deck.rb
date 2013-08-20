@@ -1,30 +1,34 @@
 
 class Deck
 
-  def initialize(deck)
+  def initialize(deck = [])
     @deck = deck
   end
 
   def self.full
     deck = []
     ["C","D","H","S"].each do |colour|
-      ["A","2","3","4","5","6","7","8","9","10","J","Q","K"].each do |num|
+      ["A","2","3","4","5","6","7","8","9","0","J","Q","K"].each do |num|
         deck << "#{colour}#{num}"
       end
     end 
     self.new(deck)
   end
 
-  def self.empty
-    @deck = []
-  end
-  
   def pop
     @deck.pop
   end
 
+  def push(card)
+    @deck.push card
+  end
+
   def count
     @deck.count
+  end
+
+  def empty?
+    @deck.count == 0 
   end
 
   def each3 

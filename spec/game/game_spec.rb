@@ -25,13 +25,17 @@ describe Game do
 
   it "should be able to print the table" do
     @game.lay(Deck.full)
-    @game.output_s.length.should > 50 
+    @game.output_table.length.should > 50 
   end
   
+  it "should be able to print the aces" do
+    @game.output_aces.length.should > 10
+  end
+
   it "should be able to see open cards" do
     @game.lay(Deck.full)
     # Last card in unshuffled deck (on top) should be first card in game
-    @game.output_s.should match /SK/
+    @game.output_table.should match /SK/
   end
 
 

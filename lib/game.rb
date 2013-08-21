@@ -1,11 +1,14 @@
 require 'column'
+require 'deck/ace'
+
 class Game
-  
+
   def initialize
     @col = []
-    7.times {
-      @col << Column.new
-    }
+    7.times { @col << Column.new }
+
+    @ace = []
+    4.times { @ace << Deck::Ace.new }
   end
   
   def lay(deck)
@@ -19,7 +22,16 @@ class Game
     end
   end
 
-  def output_s
+  def output_aces
+    out = ''
+    (0..3).each do |i|
+      out << "#{@ace[i].top} "
+    end
+    out << "\n"
+    out
+  end
+
+  def output_table
     out = ''
     
     (0..self.longest_column_length-1).each do |row|

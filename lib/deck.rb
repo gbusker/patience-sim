@@ -45,7 +45,7 @@ class Deck
   # Very simple : just take two random cards and swap them, n times
   def shuffle(n)
     if @deck.count <= 1 
-      throw CannotShuffle
+      throw :CannotShuffle
     end
     while n>0 do
       card1 = rand(@deck.count)
@@ -69,6 +69,13 @@ class Deck
     @deck[b] = carda
   end
 
+  def [](i)
+    if i>=0 and i<@deck.count
+      @deck[i]
+    else
+      throw :IndexOutOfRange
+    end
+  end
 
 end
   

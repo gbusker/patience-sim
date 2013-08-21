@@ -1,7 +1,7 @@
 require 'deck'
 class Column
 
-  class Stack < Deck
+  class Deck::Open < Deck
     def [](n)
       return @deck[n]
     end
@@ -10,9 +10,15 @@ class Column
     end
   end
 
+  class Deck::Closed < Deck
+    def each
+      @deck.each {|card| yield '##'}
+    end
+  end
+
   def initialize
-    @open = Stack.new
-    @closed = Stack.new
+    @open = Deck::Open.new
+    @closed = Deck::Closed.new
   end
 
   def open

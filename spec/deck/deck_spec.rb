@@ -49,5 +49,4 @@ describe Deck do
 
   end
 
-
 end

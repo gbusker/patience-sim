@@ -21,18 +21,20 @@ class Deck::Open < Deck
   end
 
   def expected
-    return false if @deck.last =~ /^.A$/
     return ['CK', 'DK', 'HK', 'SK'] if @deck.empty?
 
+    last = @deck.last
+    return false if last =~ /^.A$/
+
     # Colour:
-    if @deck.last =~ /^[CS].$/
+    if last =~ /^[CS].$/
       cards = ['D','H']
     else
       cards = ['C','S']
     end
     
     # next
-    index = CARD_ORDER.find_index(@deck.last[1])
+    index = CARD_ORDER.find_index(last[1])
     cards.map! {|card| card = card + CARD_ORDER[index-1]}
   end
 

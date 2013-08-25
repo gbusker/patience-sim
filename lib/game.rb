@@ -32,12 +32,10 @@ class Game
       out << "#{ace.top} "
     end
     out << "\n"
-    out
   end
 
   def output_table
     out = ''
-    
     (0..self.longest_column_length-1).each do |row|
       (0..6).each do |col|
         out << "#{column(col)[row]} "

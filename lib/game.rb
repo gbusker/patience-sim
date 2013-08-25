@@ -15,9 +15,9 @@ class Game
     @ace = []
     4.times { @ace << Deck::Ace.new }
   end
-  
+
+  # Simulate exactly how the cards are layed.  open, 6x closed, open, 5x closed, etc  
   def lay(deck)
-    # Simulate exactly how the cards are layed.  open, 6x closed, open, 5x closed, etc
     (0..6).each do |row|
       self.column(row).open.push(deck)
       ((row+1)..6).each do |col|

@@ -12,11 +12,11 @@ class Deck::Open < Deck
     @deck.each {|card| yield card}
   end
   
-  def bottom
+  def first
     @deck.first
   end
   
-  def top
+  def last
     @deck.last
   end
 

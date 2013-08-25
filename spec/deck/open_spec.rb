@@ -33,8 +33,15 @@ describe Deck::Open do
     end
 
     it 'should reject an invalid card' do
-      # XXX
+      # XXX work out how to deal with carch in rspec
       catch (:InvalidCard) { @open.push('C2') }
+    end
+  end
+
+  describe 'single card test with a black card (C4)' do
+    it 'should expect a red 3' do
+      @open = Deck::Open.new(['C4'])
+      @open.expect('D3').should be_true
     end
   end
 

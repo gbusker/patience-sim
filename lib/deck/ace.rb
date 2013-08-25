@@ -20,8 +20,7 @@ class Deck::Ace < Deck
     elsif self.top =~ /^.K$/
       false
     else
-      no = self.top[1]
-      next_no = CARD_ORDER.find_index(no)+1
+      next_no = CARD_ORDER.find_index(self.top[1])+1
       [self.top[0] + CARD_ORDER[next_no]]
     end
   end
@@ -31,12 +30,10 @@ class Deck::Ace < Deck
   end
 
   def push(card)
+    card = card.pop if card.respond_to? :pop
     throw :UnExpectedCard unless self.expect(card)
     super
   end
-
-
-
 
 end
 

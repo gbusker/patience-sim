@@ -1,14 +1,11 @@
 require 'deck'
-class Column
 
-  class Deck::Open < Deck
-    def [](n)
-      return @deck[n]
-    end
-    def each 
-      @deck.each {|card| yield card}
-    end
-  end
+#
+# Column implements a stack in patience.  A column might have a closed and an open stack 
+# of any 0-6 or 0-13 cards.
+#
+
+class Column
 
   class Deck::Closed < Deck
     def each
@@ -34,10 +31,11 @@ class Column
   end
 
   def [](n)
-    if n<@closed.count
+    n_closed = @closed.count
+    if n<n_closed
       "##"
-    elsif n<@closed.count+@open.count
-      self.open[n-@closed.count]
+    elsif n<n_closed+@open.count
+      self.open[n-n_closed]
     else
       "  "
     end  

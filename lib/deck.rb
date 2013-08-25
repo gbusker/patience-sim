@@ -1,3 +1,7 @@
+#
+# Deck implements a simple deck of cards
+#
+
 
 class Deck
 
@@ -20,7 +24,11 @@ class Deck
   end
 
   def push(card)
-    @deck.push card
+    if card.respond_to? :pop
+      @deck.push card.pop
+    else
+      @deck.push card
+    end
   end
 
   def count
@@ -32,27 +40,21 @@ class Deck
   end
 
   def each3 
-    i = 1
-    while i*3 <= @deck.count do
-      yield @deck[i*3]
-      i = i+1
-    end
-    if @deck.count > (i-1)*3 
-      yield @deck.last
-    end
+    @deck.each_slice(3) { |set_of_three| yield set_of_three.last }
   end
     
   # Very simple : just take two random cards and swap them, n times
-  def shuffle(n)
-    if @deck.count <= 1 
+  def shuffle(n_times)
+    no_cards = @deck.count
+    if no_cards <= 1 
       throw :CannotShuffle
     end
-    while n>0 do
-      card1 = rand(@deck.count)
-      while (card1 == (card2 = rand(@deck.count)))
+    while n_times>0 do
+      card_one = rand(no_cards)
+      while (card_one == (card_two = rand(no_cards)))
       end
-      self.swap(card1,card2)
-      n=n-1
+      self.swap(card_one,card_two)
+      n_times=n_times-1
     end
     
   end
@@ -61,20 +63,21 @@ class Deck
     @deck.rotate!(@deck.count/2)
   end
 
-  protected
-
-  def swap(a,b)
-    carda = @deck[a]
-    @deck[a] = @deck[b]
-    @deck[b] = carda
-  end
-
-  def [](i)
-    if i>=0 and i<@deck.count
-      @deck[i]
+  def [](index)
+    if index>=0 and index<@deck.count
+      @deck[index]
     else
       throw :IndexOutOfRange
     end
+  end
+
+
+  protected
+
+  def swap(index_a,index_b)
+    save_card_a = @deck[index_a]
+    @deck[index_a] = @deck[index_b]
+    @deck[index_b] = save_card_a
   end
 
 end

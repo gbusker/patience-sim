@@ -1,6 +1,11 @@
 require 'column'
 require 'deck/ace'
 
+#
+# This module implements a patience table with 7x Columns and 4x ace stacks
+# It uses the Column and Deck::Ace classes to abstract these concepts
+#
+
 class Game
 
   def initialize
@@ -14,18 +19,17 @@ class Game
   def lay(deck)
     # Simulate exactly how the cards are layed.  open, 6x closed, open, 5x closed, etc
     (0..6).each do |row|
-
-      self.column(row).open.push deck.pop
+      self.column(row).open.push(deck)
       ((row+1)..6).each do |col|
-        self.column(col).closed.push deck.pop
+        self.column(col).closed.push(deck)
       end
     end
   end
 
   def output_aces
     out = ''
-    (0..3).each do |i|
-      out << "#{@ace[i].top} "
+    @ace.each do |ace|
+      out << "#{ace.top} "
     end
     out << "\n"
     out
@@ -44,21 +48,20 @@ class Game
   end
 
   def longest_column_length
-    l=0
-    self.each {|c| l=c.count if c.count>l}
-    l
+    longest=0
+    self.each {|card| longest=card.count if card.count>longest}
+    longest
   end
 
   protected
 
   def each 
-    @col.each {|c| yield c}
+    @col.each {|column| yield column}
   end
 
-  def column(n)
-    throw ColumnIndexOutOfRange if n<0 or n>6
-    @col[n]
+  def column(index)
+    throw ColumnIndexOutOfRange if index<0 or index>6
+    @col[index]
   end
-
 
 end

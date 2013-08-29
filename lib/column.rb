@@ -1,4 +1,5 @@
 require 'deck'
+require 'deck/open'
 
 #
 # Column implements a stack in patience.  A column might have a closed and an open stack 
